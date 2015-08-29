@@ -6,7 +6,7 @@ For Python 2, check out [TableTest](https://github.com/horia141/tabletest).
 
 Many unit tests, especially those for side-effect free functions, can be written like this:
 
-```python
+```python3
 import unittest
 class FooTest(unittest.TestCase):
   TEST_CASES = [ case_1, case_2, ... ]
@@ -21,7 +21,7 @@ of the tests actually fail.
 
 Tabletest aims to solve this problem. Using it, we can rewrite the previous example as:
 
-```python
+```python3
 import tabletest
 class FooTest(tabletest.TableTestCase):
   TEST_CASES = [ case_1, case_2, ... ]
