@@ -21,7 +21,7 @@ of the tests actually fail.
 
 TableTest3 aims to solve this problem. Using it, we can rewrite the previous example as:
 
-```pytho3
+```python
 import tabletest
 class FooTest(tabletest.TableTestCase):
   TEST_CASES = [ case_1, case_2, ... ]
