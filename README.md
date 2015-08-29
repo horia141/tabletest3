@@ -6,7 +6,7 @@ For Python 2, check out [TableTest](https://github.com/horia141/tabletest).
 
 Many unit tests, especially those for side-effect free functions, can be written like this:
 
-```python3
+```python
 import unittest
 class FooTest(unittest.TestCase):
   TEST_CASES = [ case_1, case_2, ... ]
@@ -19,9 +19,9 @@ If there are many test cases, they'll all appear as a single unit test in test r
 the failure of one test will cause all others to fail. Finally, it might be hard to identify which
 of the tests actually fail.
 
-Tabletest aims to solve this problem. Using it, we can rewrite the previous example as:
+TableTest3 aims to solve this problem. Using it, we can rewrite the previous example as:
 
-```python3
+```pytho3
 import tabletest
 class FooTest(tabletest.TableTestCase):
   TEST_CASES = [ case_1, case_2, ... ]
