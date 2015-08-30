@@ -44,7 +44,8 @@ class TableTestMetaclass(type):
     def __new__(cls, name, bases, attrs):
         test_idx = 0
         for test_case in attrs['TEST_CASES']:
-            attrs['test_table_{0}'.format(test_idx)] = lambda self: self.tabletest(test_case)
+            test_name = 'test_table_{0}'.format(test_idx)
+            attrs[test_name] = lambda self, test_case=test_case: self.tabletest(test_case)
             test_idx += 1
 
         return type.__new__(cls, name, bases, attrs)
