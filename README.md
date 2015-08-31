@@ -25,7 +25,8 @@ TableTest3 aims to solve this problem. Using it, we can rewrite the previous exa
 import tabletest
 class FooTest(tabletest.TableTestCase):
   TEST_CASES = [ case_1, case_2, ... ]
-  def tabletest(self, test_case):
+  @tabletest.tabletest(TEST_CASES)
+  def test_all(self, test_case):
     do something with test_case
 ```
 
@@ -36,8 +37,9 @@ The setup functions like this:
 * You must define a `TEST_CASE` class variable which can be iterated as a sequence.
 * You must define a single argumet `tabletest` function which does the testing required for each
   test case.
-* Each element of `TEST_CASE` generates a test function, called `test_table_{xx}`.
+* Each element of `TEST_CASE` generates a test function, called `test_all_{xx}`.
 * Iteration order is not guaranteed and should not be depended on.
 * All other `unittest.TestCase` behavior remains intact: `setUp` and `tearDown` methods, other test
   methods etc.
-* Only a single `TEST_CASES` sequence and `tabletest` function can exist per case.
+* More than one test can be annotated with tabletests per test case.
+* However, the name must starst with `test_`, so it is picked up by the runner.

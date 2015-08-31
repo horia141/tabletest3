@@ -18,7 +18,8 @@ TableTest3 aims to solve this problem. Using it, we can rewrite the previous exa
 import tabletest3
 class FooTest(tabletest3.TableTestCase):
   TEST_CASES = [ case_1, case_2, ... ]
-  def tabletest(self, test_case):
+  @tabletest3.tabletest(TEST_CASES)
+  def test_all(self, test_case):
     do something with test_case
 
 When the testrunner will run this class, it will now find one test for each test case. Each test
@@ -26,13 +27,14 @@ will basically invoke tabletest with a single test case.
 
 The setup functions like this:
 * You must define a TEST_CASE class variable which can be iterated as a sequence.
-* You must define a single argumet tabletest function which does the testing required for each
+* You must define a single argument test function which does the testing required for each
   test case.
-* Each element of TEST_CASE generates a test function, called test_table_{xx}.
+* Each element of TEST_CASE generates a test function, called test_all_{xx}.
 * Iteration order is not guaranteed and should not be depended on.
 * All other unittest.TestCase behavior remains intact: setUp and tearDown methods, other test
   methods etc.
-* Only a single TEST_CASES sequence and tabletest function can exist per case.
+* More than one test can be annotated with tabletests per test case.
+* However, the name must starst with "test_", so it is picked up by the runner.
 """
 import unittest
 
@@ -42,20 +44,32 @@ class TableTestMetaclass(type):
     Useful for when a testcase can't be inherited from TableTestCase.
     """
     def __new__(cls, name, bases, attrs):
-        test_idx = 0
-        for test_case in attrs['TEST_CASES']:
-            test_name = 'test_table_{0}'.format(test_idx)
-            attrs[test_name] = lambda self, test_case=test_case: self.tabletest(test_case)
-            test_idx += 1
+        new_attrs = {}
+        for name, attr in attrs.items():
+            if hasattr(attr, '__call__') and hasattr(attr, '_is_tabletest'):
+                test_idx = 0
+                for test_case in attr._test_cases:
+                    test_name = '{0}_{1}'.format(name, test_idx)
+                    new_attrs[test_name] = \
+                        lambda self, attr=attr, test_case=test_case: attr(self, test_case)
+                    test_idx += 1
+            else:
+                new_attrs[name] = attr
 
-        return type.__new__(cls, name, bases, attrs)
+        return type.__new__(cls, name, bases, new_attrs)
 
 
 class TableTestCase(unittest.TestCase,metaclass=TableTestMetaclass):
     """Base class for table-like test cases."""
+    __metaclass__ = TableTestMetaclass
 
-    TEST_CASES = []
 
-    def tabletest(self, test_case):
-        """Unittest applied to each test case."""
-        raise NotImplementedError()
+class tabletest(object):
+    """Annotation for marking test methods as table tests."""
+    def __init__(self, test_cases):
+        self._test_cases = iter(test_cases)
+
+    def __call__(self, tester_fn):
+        tester_fn._is_tabletest = True
+        tester_fn._test_cases = self._test_cases
+        return tester_fn
