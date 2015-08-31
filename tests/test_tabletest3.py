@@ -6,7 +6,6 @@ import tabletest3
 class TableTestCaseExample(tabletest3.TableTestCase):
     """An example table test case, with three test cases."""
     TEST_CASES = ['A', 'B', 'C']
-
     SEEN = set()
 
     @tabletest3.tabletest(TEST_CASES)

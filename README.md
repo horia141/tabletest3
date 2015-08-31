@@ -23,9 +23,9 @@ TableTest3 aims to solve this problem. Using it, we can rewrite the previous exa
 
 ```python
 import tabletest
-class FooTest(tabletest.TableTestCase):
+class FooTest(tabletest3.TableTestCase):
   TEST_CASES = [ case_1, case_2, ... ]
-  @tabletest.tabletest(TEST_CASES)
+  @tabletest3.tabletest(TEST_CASES)
   def test_all(self, test_case):
     do something with test_case
 ```
@@ -35,9 +35,10 @@ will basically invoke `tabletest` with a single test case.
 
 The setup functions like this:
 * You must define a `TEST_CASE` class variable which can be iterated as a sequence.
-* You must define a single argumet `tabletest` function which does the testing required for each
+* You must define a single argumet test function which does the testing required for each
   test case.
-* Each element of `TEST_CASE` generates a test function, called `test_all_{xx}`.
+* Each element of `TEST_CASE` generates a test function, called `test_all_{xx}`, for the previous
+  example.
 * Iteration order is not guaranteed and should not be depended on.
 * All other `unittest.TestCase` behavior remains intact: `setUp` and `tearDown` methods, other test
   methods etc.

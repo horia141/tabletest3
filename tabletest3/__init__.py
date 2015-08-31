@@ -29,7 +29,8 @@ The setup functions like this:
 * You must define a TEST_CASE class variable which can be iterated as a sequence.
 * You must define a single argument test function which does the testing required for each
   test case.
-* Each element of TEST_CASE generates a test function, called test_all_{xx}.
+* Each element of TEST_CASE generates a test function, called test_all_{xx}, for the previous
+  example.
 * Iteration order is not guaranteed and should not be depended on.
 * All other unittest.TestCase behavior remains intact: setUp and tearDown methods, other test
   methods etc.
