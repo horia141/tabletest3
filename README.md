@@ -44,3 +44,11 @@ The setup functions like this:
   methods etc.
 * More than one test can be annotated with tabletests per test case.
 * However, the name must starst with `test_`, so it is picked up by the runner.
+
+## Installation ##
+
+Installation is straightforward, via `pip`:
+
+```bash
+pip install tabletest3
+```
