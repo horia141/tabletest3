@@ -52,3 +52,10 @@ Installation is straightforward, via `pip`:
 ```bash
 pip install tabletest3
 ```
+
+## References ##
+
+See [Tabletests][tabletests] and [How Tabletest Works][how-tabletest-works] for a longer introduction as well as a deep dive into the library.
+
+[tabletests]: https://horia141.github.com/jekyll/update/2015/08/31/tabletests.html
+[how-tabletest-works]: https://horia141.github.com/jekyll/update/2015/09/08/how-tabletest-works.html
