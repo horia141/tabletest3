@@ -53,9 +53,18 @@ Installation is straightforward, via `pip`:
 pip install tabletest3
 ```
 
+## Development ##
+
+Working on this project is pretty much standard Python development. Perhaps the most novel aspect is the usage of the [Bazel][bazel] build system. At the moment, only a `py_library` and a `py_test` are defined as build rules. Nevertheless, tests are run through [Bazel][bazel] rather than through regular invocation. To run the tests use:
+
+```bash
+bazel test //:tabletest_test
+```
+
 ## References ##
 
 See [Tabletests][tabletests] and [How Tabletest Works][how-tabletest-works] for a longer introduction as well as a deep dive into the library.
 
 [tabletests]: https://horia141.github.com/jekyll/update/2015/08/31/tabletests.html
 [how-tabletest-works]: https://horia141.github.com/jekyll/update/2015/09/08/how-tabletest-works.html
+[bazel]: http://bazel.io
