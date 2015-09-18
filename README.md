@@ -58,7 +58,13 @@ pip install tabletest3
 Working on this project is pretty much standard Python development. Perhaps the most novel aspect is the usage of the [Bazel][bazel] build system. At the moment, only a `py_library` and a `py_test` are defined as build rules. Nevertheless, tests are run through [Bazel][bazel] rather than through regular invocation. To run the tests use:
 
 ```bash
-bazel test //:tabletest_test
+bazel test //:tabletest3_test
+```
+
+To push a new version of the package to PyPi use:
+
+```bash
+bazel run //:tabletest3_upload -- --user=[pypi user] --pass=[pypi password]
 ```
 
 ## References ##
