@@ -5,10 +5,6 @@ py_library(
     srcs = ["tabletest3/__init__.py"],
 )
 
-# TODO(horia141): This rule is badly written. It references "tabletest3/__init__.py" directly,
-# instead of through the "tabletest3" dependency. There seems to be a bug in Bazel, where it
-# doesn't properly pick up the fact that both rules are for Python 3 and should work without
-# inovking 2to3.
 py_test(
     name = "tabletest3_test",
     main = "tests/test_tabletest3.py",
@@ -24,7 +20,7 @@ py_test(
 
 pypi_package(
     name = "tabletest3_pkg",
-    version = "1.0.3",
+    version = "1.0.4",
     description = "Unit testing module for table-like test, for Python 3.",
     long_description = "README.md",
     classifiers = [
