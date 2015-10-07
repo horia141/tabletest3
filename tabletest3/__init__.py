@@ -51,6 +51,8 @@ class TableTestMetaclass(type):
                 test_idx = 0
                 for test_case in attr._test_cases:
                     test_name = '{0}_{1}'.format(name, test_idx)
+                    if test_name in new_attrs:
+                        raise Exception('Name "{0}" is already used'.format(test_name))
                     new_attrs[test_name] = \
                         lambda self, attr=attr, test_case=test_case: attr(self, test_case)
                     test_idx += 1
